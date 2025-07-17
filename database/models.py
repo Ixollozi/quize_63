@@ -13,7 +13,7 @@ class User(Base):
 
     name = Column(String, nullable=False, unique=True)
     phone = Column(String, nullable=False)
-
+    avatar = Column(String, nullable=True)
     reg_date = Column(DateTime, default=datetime.now())
 
 # Модель вопросов
@@ -35,7 +35,7 @@ class UserAnswer(Base):
     id = Column(Integer, autoincrement=True, primary_key=True)
 
     user_id = Column(Integer, ForeignKey('users.id'))
-    user_answer = Column(String, nullable=False)
+    user_answer = Column(Integer, nullable=False)
     question_id = Column(Integer, ForeignKey('questions.id'))
     correctness = Column(Boolean, nullable=False, default=False)
     level = Column(String)
@@ -49,7 +49,8 @@ class Rating(Base):
     id = Column(Integer, autoincrement=True, primary_key=True)
 
     user_id = Column(Integer, ForeignKey('users.id'))
-    correct_anwer = Column(String, default=0)
+    correct_answer = Column(Integer, default=0)
+    level = Column(String, default='Beginner')
 
     user_fk = relationship(User, lazy='subquery')
 

@@ -7,7 +7,8 @@ class User(BaseModel):
 
     name: str
     phone: str
-    reg_time: datetime
+    avatar: str
+    reg_time: Optional[datetime] = datetime.now()
 
 class Question(BaseModel):
     main_question: str
@@ -22,7 +23,7 @@ class Question(BaseModel):
 class UserAnswer(BaseModel):
 
     user_id: int
-    user_answer: str
+    user_answer: int
     question_id: int
 
     level: Optional[str] = 'Beginner'
