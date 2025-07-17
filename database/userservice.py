@@ -60,4 +60,10 @@ def update_rating_db(db: Session, user_id: int, level: str):
 
 
 
-
+def update_user_avatar_db(db: Session,user_id: int, file_path: str):
+    user = db.query(User).filter(User.id == user_id).first()
+    if user:
+        user.avatar = file_path
+        db.commit()
+        return True
+    return False
