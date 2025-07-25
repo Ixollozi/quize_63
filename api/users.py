@@ -54,3 +54,8 @@ def upload_avatar(user_id: int, file: UploadFile = File(...), db: Session = Depe
         return HTTPException(status_code=500, detail=f'Обвление провалено {e}')
 
 
+@user_router.post('/answer')
+def user_answer(answer: UserAnswer, db: Session = Depends(get_db)):
+    is_correct = save_user_answer_db(db, answer.user_id, answer.question_id, answer.user_answer)
+    return {'correct': is_correct,
+            'message': 'Правильно' if is_correct else 'Неправильно'}
